@@ -26,11 +26,11 @@ setup({
       return {extends: extending}
   },
   createDependencyList: (config) => {
-    const dependencies = [dependencyString('eslint')];
+    const dependencies = ['eslint'];
     if (config.prettier) {
-      dependencies.push(dependencyString('eslint-config-prettier'));
-      dependencies.push(dependencyString('eslint-plugin-prettier'));
-      dependencies.push('prettier@latest');
+      dependencies.push('eslint-config-prettier');
+      dependencies.push('eslint-plugin-prettier');
+      dependencies.push('prettier');
     }
     return dependencies;
   }
