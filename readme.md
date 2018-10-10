@@ -1,5 +1,11 @@
 # setup-eslint-config
 
+This is a little utility to help manage installation of eslint configs. This
+is kind of an opinionated solution to the fact that eslint needs peer dependencies
+not dependencies for config uses other configs and plugins. It will install
+the given list of packages with the same version that can be found in
+`devDependencies`.
+
 ## Installation
 
 ```
@@ -19,6 +25,8 @@ also contains a few other fields:
 * babel - is there a .babelrc file in the directory
 * typescript - is there a tsconfig.json file in the directory
 * flowtype - is there a .flowconfig file in the directory
+
+Create a file like the following example, and then add it to bin in `package.json`.
 
 ```javascript
 const {setup} = require('setup-eslint-config')
