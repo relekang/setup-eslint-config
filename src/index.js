@@ -7,18 +7,19 @@ const yaml = require("js-yaml");
 const { promisify } = require("util");
 
 const writeFile = promisify(fs.writeFile);
+const access = promisify(fs.access);
 
 async function setup(setupConfig) {
   const config = await createConfig(setupConfig);
   const tasks = new Listr([
     {
       title: `Installing dependencies ${config.dependencies.join(" ")}`,
-      task: () => install(config)
+      task: () => install(config),
     },
     {
       title: "Creating configuration",
-      task: () => updateEslintConfig(setupConfig, config)
-    }
+      task: () => updateEslintConfig(setupConfig, config),
+    },
   ]);
   await tasks.run();
 }
@@ -28,7 +29,10 @@ async function createConfig(setupConfig) {
   const answers = await prompts(setupConfig.prompts);
   const config = {
     ...answers,
-    yarn: fs.existsSync(path.resolve(process.cwd(), "yarn.lock"))
+    yarn: await exists(path.resolve(process.cwd(), "yarn.lock")),
+    babel: await exists(path.resolve(process.cwd(), ".babelrc")),
+    typescript: await exists(path.resolve(process.cwd(), "tsconfig.json")),
+    flowtype: await exists(path.resolve(process.cwd(), ".flowconfig")),
   };
 
   config.dependencies = setupConfig
@@ -68,7 +72,7 @@ function mergeConfigs(current, generated) {
   return {
     ...(current ? current : {}),
     ...generated,
-    env: { ...(current || {}).env, ...generated.env }
+    env: { ...(current || {}).env, ...generated.env },
   };
 }
 
@@ -83,4 +87,13 @@ function install(config) {
     return execa("yarn", ["add", "--dev", ...config.dependencies]);
   }
   return execa("npm", ["install", "--dev", ...config.dependencies]);
+}
+
+async function exists(path) {
+  try {
+    await access(path);
+    return true;
+  } catch (error) {
+    return false;
+  }
 }

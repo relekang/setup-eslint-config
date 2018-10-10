@@ -10,6 +10,16 @@ yarn add setup-eslint-config
 
 ## Usage
 
+Below is an example with the basic usage. The prompts property is passed on to 
+the [prompts][] package, thus read their documentation on available options.
+The result of the prompts are passed to functions as `config`. The config object
+also contains a few other fields:
+
+* yarn - is there a yarn.lock file in the directory
+* babel - is there a .babelrc file in the directory
+* typescript - is there a tsconfig.json file in the directory
+* flowtype - is there a .flowconfig file in the directory
+
 ```javascript
 const {setup} = require('setup-eslint-config')
 
@@ -39,3 +49,5 @@ setup({
     process.exit(1)
 })
 ```
+
+[prompts]: https://www.npmjs.com/package/prompts

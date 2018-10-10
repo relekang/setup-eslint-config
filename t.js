@@ -23,7 +23,7 @@ setup({
       dependencies.push("prettier");
     }
     return dependencies;
-  }
+  },
 }).catch(error => {
   console.error(error);
   process.exit(1);
