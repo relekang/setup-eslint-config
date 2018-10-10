@@ -1,10 +1,10 @@
-const fs = require("fs");
-const path = require("path");
-const prompts = require("prompts");
-const Listr = require("listr");
-const execa = require("execa");
-const yaml = require("js-yaml");
-const { promisify } = require("util");
+const fs = require('fs');
+const path = require('path');
+const prompts = require('prompts');
+const Listr = require('listr');
+const execa = require('execa');
+const yaml = require('js-yaml');
+const { promisify } = require('util');
 
 const writeFile = promisify(fs.writeFile);
 const access = promisify(fs.access);
@@ -13,11 +13,11 @@ async function setup(setupConfig) {
   const config = await createConfig(setupConfig);
   const tasks = new Listr([
     {
-      title: `Installing dependencies ${config.dependencies.join(" ")}`,
+      title: `Installing dependencies ${config.dependencies.join(' ')}`,
       task: () => install(config),
     },
     {
-      title: "Creating configuration",
+      title: 'Creating configuration',
       task: () => updateEslintConfig(setupConfig, config),
     },
   ]);
@@ -29,10 +29,10 @@ async function createConfig(setupConfig) {
   const answers = await prompts(setupConfig.prompts);
   const config = {
     ...answers,
-    yarn: await exists(path.resolve(process.cwd(), "yarn.lock")),
-    babel: await exists(path.resolve(process.cwd(), ".babelrc")),
-    typescript: await exists(path.resolve(process.cwd(), "tsconfig.json")),
-    flowtype: await exists(path.resolve(process.cwd(), ".flowconfig")),
+    yarn: await exists(path.resolve(process.cwd(), 'yarn.lock')),
+    babel: await exists(path.resolve(process.cwd(), '.babelrc')),
+    typescript: await exists(path.resolve(process.cwd(), 'tsconfig.json')),
+    flowtype: await exists(path.resolve(process.cwd(), '.flowconfig')),
   };
 
   config.dependencies = setupConfig
@@ -45,16 +45,16 @@ async function createConfig(setupConfig) {
 function updateEslintConfig(setupConfig, config) {
   const generatedConfig = setupConfig.createEslintConfig(config);
   const filename =
-    require(path.resolve(process.cwd(), "package.json")).name ===
+    require(path.resolve(process.cwd(), 'package.json')).name ===
     setupConfig.name
-      ? ".eslintrc.test"
-      : ".eslintrc";
+      ? '.eslintrc.test'
+      : '.eslintrc';
   const configPath = path.join(process.cwd(), filename);
   let currentConfig;
   try {
     currentConfig = fs.readFileSync(configPath);
   } catch (error) {
-    currentConfig = "---";
+    currentConfig = '---';
   }
   try {
     currentConfig = yaml.safeLoad(currentConfig);
@@ -84,9 +84,9 @@ function dependencyString(packageInfo) {
 
 function install(config) {
   if (config.yarn) {
-    return execa("yarn", ["add", "--dev", ...config.dependencies]);
+    return execa('yarn', ['add', '--dev', ...config.dependencies]);
   }
-  return execa("npm", ["install", "--dev", ...config.dependencies]);
+  return execa('npm', ['install', '--dev', ...config.dependencies]);
 }
 
 async function exists(path) {

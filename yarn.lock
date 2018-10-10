@@ -607,6 +607,13 @@ eslint-config-prettier@^3.1.0:
   dependencies:
     get-stdin "^6.0.0"
 
+eslint-config-relekang@^1.0.0-rc.1:
+  version "1.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-relekang/-/eslint-config-relekang-1.0.0-rc.1.tgz#d419d8c00b4c497303de406b3705058b6c0a6962"
+  integrity sha512-Mig5EFuFSbrePFE2b82q1Eow3Cq11EmGAv+ojy8eBy9mzf8WGDRLOMzFfSd5ecTpplqX5PYKNdAF/PLn/OKylg==
+  dependencies:
+    setup-eslint-config "^1.0.0-rc.3"
+
 eslint-plugin-prettier@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.0.0.tgz#f6b823e065f8c36529918cdb766d7a0e975ec30c"
@@ -1909,6 +1916,16 @@ set-blocking@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha1-BF+XgtARrppoA93TgrJDkrPYkPc=
+
+setup-eslint-config@^1.0.0-rc.3:
+  version "1.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/setup-eslint-config/-/setup-eslint-config-1.0.0-rc.3.tgz#555079e7d57f80461c8f4b97cca5bdde04793170"
+  integrity sha512-TKYlcJyZ0J4fSlHnKzjot1ILpxCpRc3tgTIlc2fMfYTd1UCXxvkmiUiJ6S+W27bskfMECKynYfKsB+Fdej1r1g==
+  dependencies:
+    execa "^1.0.0"
+    js-yaml "^3.12.0"
+    listr "^0.14.2"
+    prompts "^1.1.1"
 
 shebang-command@^1.2.0:
   version "1.2.0"

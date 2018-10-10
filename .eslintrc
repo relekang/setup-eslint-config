@@ -1,12 +1,5 @@
 ---
 extends:
- - eslint:recommended
- - prettier
-plugins:
- - prettier
-rules:
- prettier/prettier: [2, {trailingComma: "es5"}]
-parserOptions:
- ecmaVersion: 2018
+  - relekang
 env:
- node: true
+  node: true
