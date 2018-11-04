@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createConfig 1`] = `
+Object {
+  "babel": false,
+  "dependencies": Array [
+    "eslint@^42",
+  ],
+  "flowtype": false,
+  "typescript": false,
+  "yarn": true,
+}
+`;

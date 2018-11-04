@@ -2,16 +2,17 @@
   "name": "setup-eslint-config",
   "version": "1.0.0-rc.3",
   "description": "Helper to create setup scripts for eslint configs",
-  "main": "src/index.js",
+  "main": "index.js",
   "repository": "git@github.com:relekang/setup-eslint-config.git",
   "author": "Rolf Erik Lekang <me@rolflekang.com>",
   "license": "MIT",
   "scripts": {
+    "test": "jest",
     "release": "standard-version -i changelog.md"
   },
   "files": [
     "readme.md",
-    "src",
+    "index.js",
     "license"
   ],
   "dependencies": {
@@ -25,6 +26,7 @@
     "eslint-config-prettier": "^3.1.0",
     "eslint-config-relekang": "^1.0.0-rc.1",
     "eslint-plugin-prettier": "^3.0.0",
+    "jest": "^23.6.0",
     "prettier": "^1.14.3",
     "standard-version": "^4.4.0"
   }

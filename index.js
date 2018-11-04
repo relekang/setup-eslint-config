@@ -23,7 +23,6 @@ async function setup(setupConfig) {
   ]);
   await tasks.run();
 }
-module.exports = { setup };
 
 async function createConfig(setupConfig) {
   const answers = await prompts(setupConfig.prompts);
@@ -97,3 +96,5 @@ async function exists(path) {
     return false;
   }
 }
+
+module.exports = { setup, createConfig };

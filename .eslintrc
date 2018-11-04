@@ -1,5 +1,6 @@
 ---
 extends:
   - relekang
+  - relekang/configs/jest
 env:
   node: true
