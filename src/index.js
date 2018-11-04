@@ -86,7 +86,7 @@ function install(config) {
   if (config.yarn) {
     return execa('yarn', ['add', '--dev', ...config.dependencies]);
   }
-  return execa('npm', ['install', '--dev', ...config.dependencies]);
+  return execa('npm', ['install', '--save-dev', ...config.dependencies]);
 }
 
 async function exists(path) {
