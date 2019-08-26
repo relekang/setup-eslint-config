@@ -30,6 +30,9 @@ async function createConfig(setupConfig) {
     babel: await exists(path.resolve(process.cwd(), '.babelrc')),
     typescript: await exists(path.resolve(process.cwd(), 'tsconfig.json')),
     flowtype: await exists(path.resolve(process.cwd(), '.flowconfig')),
+    react: await hasDependency(setupConfig.packageInfo, 'react'),
+    vue: await hasDependency(setupConfig.packageInfo, 'vue'),
+    prettier: await hasDependency(setupConfig.packageInfo, 'prettier'),
   };
   const detectedKeys = Object.keys(detected);
 

@@ -7,7 +7,10 @@ Object {
     "eslint@^42",
   ],
   "flowtype": false,
+  "prettier": false,
+  "react": false,
   "typescript": false,
+  "vue": false,
   "yarn": true,
 }
 `;
