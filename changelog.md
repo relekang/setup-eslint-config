@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.1.0](https://github.com/relekang/setup-eslint-config/compare/v1.0.2...v1.1.0) (2019-08-26)
+
+
+### Features
+
+* Add autodetect of react,vue and prettier ([ff2ae85](https://github.com/relekang/setup-eslint-config/commit/ff2ae85))
+* Add skipping of prompts based on skipDetectedPrompts ([26aa8e6](https://github.com/relekang/setup-eslint-config/commit/26aa8e6))
+
+
+
 ## [1.0.2](https://github.com/relekang/setup-eslint-config/compare/v1.0.1...v1.0.2) (2019-04-16)
 
 
