@@ -16,7 +16,7 @@ yarn add setup-eslint-config
 
 ## Usage
 
-Below is an example with the basic usage. The prompts property is passed on to 
+Below is an example with the basic usage. The prompts property is passed on to
 the [prompts][] package, thus read their documentation on available options.
 The result of the prompts are passed to functions as `config`. If there is an
 autodetection with the same name and `skipDetectedPrompts` is set to true then
@@ -31,6 +31,7 @@ the prompt will be skipped. See list of autodetected things below.
 * vue - is vue a dependency or dev dependency
 * react - is react a dependency or dev dependency
 * prettier - is prettier a dependency or dev dependency
+* jest - is jest a dependency or dev dependency
 
 Create a file like the following example, and then add it to bin in `package.json`.
 

@@ -7,6 +7,7 @@ Object {
     "eslint@^42",
   ],
   "flowtype": false,
+  "jest": false,
   "prettier": false,
   "react": false,
   "typescript": false,

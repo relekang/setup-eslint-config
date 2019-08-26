@@ -33,6 +33,7 @@ async function createConfig(setupConfig) {
     react: await hasDependency(setupConfig.packageInfo, 'react'),
     vue: await hasDependency(setupConfig.packageInfo, 'vue'),
     prettier: await hasDependency(setupConfig.packageInfo, 'prettier'),
+    jest: await hasDependency(setupConfig.packageInfo, 'jest'),
   };
   const detectedKeys = Object.keys(detected);
 
