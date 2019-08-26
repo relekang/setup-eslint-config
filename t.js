@@ -1,12 +1,16 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
-const { setup } = require('./src');
+const { setup } = require('./');
 
 const packageInfo = require('./package.json');
 
 setup({
   name: 'setup-eslint-config',
-  prompts: [{ type: 'confirm', name: 'prettier', message: 'Use prettier?' }],
+  prompts: [
+    { type: 'confirm', name: 'prettier', message: 'Use prettier?' },
+    { type: 'confirm', name: 'day', message: 'Having a nice day?' },
+  ],
+  skipDetectedPrompts: true,
   packageInfo,
   createEslintConfig: config => {
     const extending = ['relekang'];

@@ -25,13 +25,21 @@ async function setup(setupConfig) {
 }
 
 async function createConfig(setupConfig) {
-  const answers = await prompts(setupConfig.prompts);
-  const config = {
-    ...answers,
+  const detected = {
     yarn: await exists(path.resolve(process.cwd(), 'yarn.lock')),
     babel: await exists(path.resolve(process.cwd(), '.babelrc')),
     typescript: await exists(path.resolve(process.cwd(), 'tsconfig.json')),
     flowtype: await exists(path.resolve(process.cwd(), '.flowconfig')),
+  };
+  const detectedKeys = Object.keys(detected);
+
+  const promptsConfig = setupConfig.skipDetectedPrompts
+    ? setupConfig.prompts.filter(prompt => !detectedKeys.includes(prompt.name))
+    : setupConfig.prompts;
+  const answers = await prompts(promptsConfig);
+  const config = {
+    ...detected,
+    ...answers,
   };
 
   config.dependencies = setupConfig
@@ -95,6 +103,13 @@ async function exists(path) {
   } catch (error) {
     return false;
   }
+}
+
+async function hasDependency(packageInfo, name) {
+  return (
+    !!(packageInfo.dependencies || {})[name] ||
+    !!(packageInfo.devDependencies || {})[name]
+  );
 }
 
 module.exports = { setup, createConfig };

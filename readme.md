@@ -18,8 +18,11 @@ yarn add setup-eslint-config
 
 Below is an example with the basic usage. The prompts property is passed on to 
 the [prompts][] package, thus read their documentation on available options.
-The result of the prompts are passed to functions as `config`. The config object
-also contains a few other fields:
+The result of the prompts are passed to functions as `config`. If there is an
+autodetection with the same name and `skipDetectedPrompts` is set to true then
+the prompt will be skipped. See list of autodetected things below.
+
+#### Autodetection
 
 * yarn - is there a yarn.lock file in the directory
 * babel - is there a .babelrc file in the directory
@@ -36,6 +39,7 @@ setup({
   prompts: [
     { type: 'confirm', name: 'prettier', message: 'Use prettier?' },
   ],
+  skipDetectedPrompts: true,
   createEslintConfig: (config) => {
       const extending = ["relekang"]
       if (config.prettier) {
