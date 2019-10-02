@@ -1,6 +1,14 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [1.2.1](https://github.com/relekang/setup-eslint-config/compare/v1.2.0...v1.2.1) (2019-10-02)
+
+
+### Bug Fixes
+
+* Add detected values to the function call in types ([3775112](https://github.com/relekang/setup-eslint-config/commit/3775112))
+* Use correct package.json for autodetection ([3b7fea9](https://github.com/relekang/setup-eslint-config/commit/3b7fea9))
 
 # [1.2.0](https://github.com/relekang/setup-eslint-config/compare/v1.1.0...v1.2.0) (2019-08-26)
 
