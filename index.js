@@ -42,7 +42,18 @@ async function createConfig(setupConfig) {
   const detectedKeys = Object.keys(detected);
 
   const promptsConfig = setupConfig.skipDetectedPrompts
-    ? setupConfig.prompts.filter(prompt => !detectedKeys.includes(prompt.name))
+    ? setupConfig.prompts.map(prompt => ({
+        ...prompt,
+        type: (prev, values, _prompt) => {
+          if (detectedKeys.includes(prompt.name)) {
+            return null;
+          }
+          if (typeof prompt.type === 'function') {
+            return prompt.type(prev, { ...detected, ...values }, _prompt);
+          }
+          return prompt.type;
+        },
+      }))
     : setupConfig.prompts;
   const answers = await prompts(promptsConfig);
   const config = {
