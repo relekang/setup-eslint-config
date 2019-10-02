@@ -6,6 +6,7 @@ const execa = require('execa');
 const yaml = require('js-yaml');
 const { promisify } = require('util');
 
+const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 const access = promisify(fs.access);
 
@@ -25,15 +26,18 @@ async function setup(setupConfig) {
 }
 
 async function createConfig(setupConfig) {
+  const packageInfo = JSON.parse(
+    await readFile(path.resolve(process.cwd(), 'package.json'))
+  );
   const detected = {
     yarn: await exists(path.resolve(process.cwd(), 'yarn.lock')),
     babel: await exists(path.resolve(process.cwd(), '.babelrc')),
     typescript: await exists(path.resolve(process.cwd(), 'tsconfig.json')),
     flowtype: await exists(path.resolve(process.cwd(), '.flowconfig')),
-    react: await hasDependency(setupConfig.packageInfo, 'react'),
-    vue: await hasDependency(setupConfig.packageInfo, 'vue'),
-    prettier: await hasDependency(setupConfig.packageInfo, 'prettier'),
-    jest: await hasDependency(setupConfig.packageInfo, 'jest'),
+    react: await hasDependency(packageInfo, 'react'),
+    vue: await hasDependency(packageInfo, 'vue'),
+    prettier: await hasDependency(packageInfo, 'prettier'),
+    jest: await hasDependency(packageInfo, 'jest'),
   };
   const detectedKeys = Object.keys(detected);
 
