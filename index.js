@@ -11,21 +11,22 @@ const writeFile = promisify(fs.writeFile);
 const access = promisify(fs.access);
 
 async function setup(setupConfig) {
-  const config = await createConfig(setupConfig);
+  const currentConfig = await loadCurrentConfig(setupConfig);
+  const config = await createConfig(setupConfig, currentConfig);
   const tasks = new Listr([
     {
-      title: `Installing dependencies ${config.dependencies.join(' ')}`,
-      task: () => install(config),
+      title: 'Creating configuration',
+      task: () => updateEslintConfig(setupConfig, config, currentConfig),
     },
     {
-      title: 'Creating configuration',
-      task: () => updateEslintConfig(setupConfig, config),
+      title: `Installing dependencies ${config.dependencies}`,
+      task: () => install(config),
     },
   ]);
   await tasks.run();
 }
 
-async function createConfig(setupConfig) {
+async function createConfig(setupConfig, currentConfig) {
   const packageInfo = JSON.parse(
     await readFile(path.resolve(process.cwd(), 'package.json'))
   );
@@ -38,6 +39,7 @@ async function createConfig(setupConfig) {
     vue: await hasDependency(packageInfo, 'vue'),
     prettier: await hasDependency(packageInfo, 'prettier'),
     jest: await hasDependency(packageInfo, 'jest'),
+    node: !!currentConfig && !!currentConfig.env && !!currentConfig.env.node,
   };
   const detectedKeys = Object.keys(detected);
 
@@ -68,17 +70,11 @@ async function createConfig(setupConfig) {
   return config;
 }
 
-function updateEslintConfig(setupConfig, config) {
-  const generatedConfig = setupConfig.createEslintConfig(config);
-  const filename =
-    require(path.resolve(process.cwd(), 'package.json')).name ===
-    setupConfig.name
-      ? '.eslintrc.test'
-      : '.eslintrc';
-  const configPath = path.join(process.cwd(), filename);
+async function loadCurrentConfig(setupConfig) {
   let currentConfig;
+  const configPath = getConfigPath(setupConfig);
   try {
-    currentConfig = fs.readFileSync(configPath);
+    currentConfig = await readFile(configPath);
   } catch (error) {
     currentConfig = '---';
   }
@@ -87,11 +83,26 @@ function updateEslintConfig(setupConfig, config) {
   } catch (error) {
     currentConfig = JSON.parse(currentConfig);
   }
+  return currentConfig;
+}
 
-  writeFile(
+async function updateEslintConfig(setupConfig, config, currentConfig) {
+  const generatedConfig = setupConfig.createEslintConfig(config);
+  const configPath = getConfigPath(setupConfig);
+
+  await writeFile(
     configPath,
     `---\n${yaml.safeDump(mergeConfigs(currentConfig, generatedConfig))}`
   );
+}
+
+function getConfigPath(setupConfig) {
+  const filename =
+    require(path.resolve(process.cwd(), 'package.json')).name ===
+    setupConfig.name
+      ? '.eslintrc.test'
+      : '.eslintrc';
+  return path.join(process.cwd(), filename);
 }
 
 function mergeConfigs(current, generated) {

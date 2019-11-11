@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createConfig 1`] = `
+exports[`createConfig with node set in current config 1`] = `
 Object {
   "babel": false,
   "dependencies": Array [
@@ -8,6 +8,24 @@ Object {
   ],
   "flowtype": false,
   "jest": true,
+  "node": true,
+  "prettier": true,
+  "react": false,
+  "typescript": false,
+  "vue": false,
+  "yarn": true,
+}
+`;
+
+exports[`createConfig without env in current config 1`] = `
+Object {
+  "babel": false,
+  "dependencies": Array [
+    "eslint@^42",
+  ],
+  "flowtype": false,
+  "jest": true,
+  "node": false,
   "prettier": true,
   "react": false,
   "typescript": false,

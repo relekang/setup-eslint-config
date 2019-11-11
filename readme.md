@@ -32,6 +32,7 @@ the prompt will be skipped. See list of autodetected things below.
 * react - is react a dependency or dev dependency
 * prettier - is prettier a dependency or dev dependency
 * jest - is jest a dependency or dev dependency
+* node - eslintConfig.env.node is true
 
 Create a file like the following example, and then add it to bin in `package.json`.
 
