@@ -8,6 +8,8 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
+    "lint": "eslint .",
+    "format": "yarn lint --fix",
     "release": "standard-version -i changelog.md"
   },
   "files": [
