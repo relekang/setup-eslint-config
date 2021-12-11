@@ -82,7 +82,7 @@ async function loadCurrentConfig(setupConfig) {
     currentConfig = "---";
   }
   try {
-    currentConfig = yaml.safeLoad(currentConfig);
+    currentConfig = yaml.load(currentConfig);
   } catch (error) {
     const rawConfig = await readFile(configPath);
     headerJS = rawConfig.slice(0, rawConfig.indexOf("module.exports"));
@@ -102,7 +102,7 @@ async function updateEslintConfig(setupConfig, config, currentConfig) {
       `${headerJS}module.exports = ${JSON.stringify(mergedConfigs, null, 2)}`
     );
   } else {
-    await writeFile(configPath, `---\n${yaml.safeDump(mergedConfigs)}`);
+    await writeFile(configPath, `---\n${yaml.dump(mergedConfigs)}`);
   }
 }
 
