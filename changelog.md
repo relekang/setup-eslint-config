@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/relekang/setup-eslint-config/compare/v1.3.3...v1.3.4) (2021-12-11)
+
+
+### Bug Fixes
+
+* run npm audit fix ([cb4ea6e](https://github.com/relekang/setup-eslint-config/commit/cb4ea6e11e38d8a76a48212f4bc25171396cd972))
+* Upgrade dependencies ([69f089f](https://github.com/relekang/setup-eslint-config/commit/69f089f3d28d145ed977e369173237f5e649f84b))
+
 ### [1.3.3](https://github.com/relekang/setup-eslint-config/compare/v1.3.2...v1.3.3) (2020-05-13)
 
 
