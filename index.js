@@ -16,8 +16,14 @@ async function setup(setupConfig) {
   const config = await createConfig(setupConfig, currentConfig);
   const tasks = new Listr([
     {
-      title: `Installing ${setupConfig.name}`,
-      task: () => install({ ...config, dependencies: [setupConfig.name] }),
+      title: `Installing ${setupConfig.packageInfo.name}@${setupConfig.packageInfo.version}`,
+      task: () =>
+        install({
+          ...config,
+          dependencies: [
+            `${setupConfig.packageInfo.name}@${setupConfig.packageInfo.version}`,
+          ],
+        }),
       skip: process.env.npm_lifecycle_event !== "npx",
     },
     {
