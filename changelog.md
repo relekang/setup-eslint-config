@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/relekang/setup-eslint-config/compare/v1.3.5...v1.4.0) (2021-12-11)
+
+
+### Features
+
+* Add support for npx ([036e202](https://github.com/relekang/setup-eslint-config/commit/036e202ab3ba2c0548535d888206731873b32be8))
+
 ### [1.3.5](https://github.com/relekang/setup-eslint-config/compare/v1.3.4...v1.3.5) (2021-12-11)
 
 
