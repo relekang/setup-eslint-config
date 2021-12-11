@@ -26,12 +26,15 @@ the prompt will be skipped. See list of autodetected things below.
 
 * yarn - is there a yarn.lock file in the directory
 * babel - is there a .babelrc file in the directory
-* typescript - is there a tsconfig.json file in the directory
+* typescript - is typescript a dependency or is there a tsconfig.json file in the directory
 * flowtype - is there a .flowconfig file in the directory
 * vue - is vue a dependency or dev dependency
 * react - is react a dependency or dev dependency
 * prettier - is prettier a dependency or dev dependency
 * jest - is jest a dependency or dev dependency
+* mocha - is mocha a dependency or dev dependency
+* ava - is ava a dependency or dev dependency
+* cypress - is cypress a dependency or dev dependency
 * node - eslintConfig.env.node is true
 
 Create a file like the following example, and then add it to bin in

@@ -39,20 +39,31 @@ async function setup(setupConfig) {
 }
 
 async function createConfig(setupConfig, currentConfig) {
+  const cwd = process.cwd();
   const packageInfo = JSON.parse(
-    await readFile(path.resolve(process.cwd(), "package.json"))
+    await readFile(path.resolve(cwd, "package.json"))
   );
   const detected = {
-    yarn: await exists(path.resolve(process.cwd(), "yarn.lock")),
-    babel: await exists(path.resolve(process.cwd(), ".babelrc")),
-    typescript: await exists(path.resolve(process.cwd(), "tsconfig.json")),
-    flowtype: await exists(path.resolve(process.cwd(), ".flowconfig")),
+    yarn: await exists(path.resolve(cwd, "yarn.lock")),
+    babel: await oneOf([
+      exists(path.resolve(cwd, ".babelrc")),
+      exists(path.resolve(cwd, "babel.config.js")),
+    ]),
+    typescript: await oneOf([
+      hasDependency(packageInfo, "typescript"),
+      exists(path.resolve(cwd, "tsconfig.json")),
+    ]),
+    flowtype: await exists(path.resolve(cwd, ".flowconfig")),
     react: await hasDependency(packageInfo, "react"),
     vue: await hasDependency(packageInfo, "vue"),
     prettier: await hasDependency(packageInfo, "prettier"),
-    jest:
-      (await hasDependency(packageInfo, "jest")) ||
-      (await hasDependency(packageInfo, "@vue/cli-plugin-unit-jest")),
+    jest: await oneOf([
+      hasDependency(packageInfo, "jest"),
+      hasDependency(packageInfo, "@vue/cli-plugin-unit-jest"),
+    ]),
+    mocha: await hasDependency(packageInfo, "mocha"),
+    ava: await hasDependency(packageInfo, "ava"),
+    cypress: await hasDependency(packageInfo, "cypress"),
     node: !!currentConfig && !!currentConfig.env && !!currentConfig.env.node,
   };
   const detectedKeys = Object.keys(detected);
@@ -82,6 +93,10 @@ async function createConfig(setupConfig, currentConfig) {
     .map(dependencyString(setupConfig.packageInfo));
 
   return config;
+}
+
+async function oneOf(array) {
+  return (await Promise.all(array)).some((v) => v);
 }
 
 async function loadCurrentConfig(setupConfig) {

@@ -2,12 +2,15 @@
 
 exports[`createConfig with node set in current config 1`] = `
 Object {
+  "ava": false,
   "babel": false,
+  "cypress": false,
   "dependencies": Array [
     "eslint@^42",
   ],
   "flowtype": false,
   "jest": true,
+  "mocha": false,
   "node": true,
   "prettier": true,
   "react": false,
@@ -19,12 +22,15 @@ Object {
 
 exports[`createConfig without env in current config 1`] = `
 Object {
+  "ava": false,
   "babel": false,
+  "cypress": false,
   "dependencies": Array [
     "eslint@^42",
   ],
   "flowtype": false,
   "jest": true,
+  "mocha": false,
   "node": false,
   "prettier": true,
   "react": false,
