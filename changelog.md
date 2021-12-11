@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.5](https://github.com/relekang/setup-eslint-config/compare/v1.3.4...v1.3.5) (2021-12-11)
+
+
+### Bug Fixes
+
+* switch listr to listr2 ([8accb4a](https://github.com/relekang/setup-eslint-config/commit/8accb4ad76d5f6597951c50559488a21fc44f743))
+
 ### [1.3.4](https://github.com/relekang/setup-eslint-config/compare/v1.3.3...v1.3.4) (2021-12-11)
 
 
