@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const prompts = require("prompts");
-const Listr = require("listr");
+const { Listr } = require("listr2");
 const execa = require("execa");
 const yaml = require("js-yaml");
 const { promisify } = require("util");
