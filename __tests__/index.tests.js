@@ -1,10 +1,10 @@
-const { createConfig } = require('../');
+const { createConfig } = require("../");
 
-test('createConfig with node set in current config', async () => {
+test("createConfig with node set in current config", async () => {
   const setupConfig = {
     prompts: [],
-    createDependencyList: () => ['eslint'],
-    packageInfo: { devDependencies: { eslint: '^42' } },
+    createDependencyList: () => ["eslint"],
+    packageInfo: { devDependencies: { eslint: "^42" } },
   };
 
   expect(
@@ -12,11 +12,11 @@ test('createConfig with node set in current config', async () => {
   ).toMatchSnapshot();
 });
 
-test('createConfig without env in current config', async () => {
+test("createConfig without env in current config", async () => {
   const setupConfig = {
     prompts: [],
-    createDependencyList: () => ['eslint'],
-    packageInfo: { devDependencies: { eslint: '^42' } },
+    createDependencyList: () => ["eslint"],
+    packageInfo: { devDependencies: { eslint: "^42" } },
   };
 
   expect(await createConfig(setupConfig, {})).toMatchSnapshot();

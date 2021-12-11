@@ -1,6 +1,12 @@
 ---
 extends:
-  - relekang
-  - relekang/configs/jest
+  - eslint:recommended
+  - plugin:prettier/recommended
+parserOptions:
+  ecmaVersion: 2020
 env:
   node: true
+overrides:
+  - files: ["**/__tests__/**"]
+    env:
+      jest: true

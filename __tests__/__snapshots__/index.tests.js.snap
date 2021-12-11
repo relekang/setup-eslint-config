@@ -13,7 +13,7 @@ Object {
   "react": false,
   "typescript": false,
   "vue": false,
-  "yarn": true,
+  "yarn": false,
 }
 `;
 
@@ -30,6 +30,6 @@ Object {
   "react": false,
   "typescript": false,
   "vue": false,
-  "yarn": true,
+  "yarn": false,
 }
 `;

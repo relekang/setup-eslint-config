@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
-const prompts = require('prompts');
-const Listr = require('listr');
-const execa = require('execa');
-const yaml = require('js-yaml');
-const { promisify } = require('util');
+const fs = require("fs");
+const path = require("path");
+const prompts = require("prompts");
+const Listr = require("listr");
+const execa = require("execa");
+const yaml = require("js-yaml");
+const { promisify } = require("util");
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
@@ -16,7 +16,7 @@ async function setup(setupConfig) {
   const config = await createConfig(setupConfig, currentConfig);
   const tasks = new Listr([
     {
-      title: 'Creating configuration',
+      title: "Creating configuration",
       task: () => updateEslintConfig(setupConfig, config, currentConfig),
     },
     {
@@ -29,31 +29,31 @@ async function setup(setupConfig) {
 
 async function createConfig(setupConfig, currentConfig) {
   const packageInfo = JSON.parse(
-    await readFile(path.resolve(process.cwd(), 'package.json'))
+    await readFile(path.resolve(process.cwd(), "package.json"))
   );
   const detected = {
-    yarn: await exists(path.resolve(process.cwd(), 'yarn.lock')),
-    babel: await exists(path.resolve(process.cwd(), '.babelrc')),
-    typescript: await exists(path.resolve(process.cwd(), 'tsconfig.json')),
-    flowtype: await exists(path.resolve(process.cwd(), '.flowconfig')),
-    react: await hasDependency(packageInfo, 'react'),
-    vue: await hasDependency(packageInfo, 'vue'),
-    prettier: await hasDependency(packageInfo, 'prettier'),
+    yarn: await exists(path.resolve(process.cwd(), "yarn.lock")),
+    babel: await exists(path.resolve(process.cwd(), ".babelrc")),
+    typescript: await exists(path.resolve(process.cwd(), "tsconfig.json")),
+    flowtype: await exists(path.resolve(process.cwd(), ".flowconfig")),
+    react: await hasDependency(packageInfo, "react"),
+    vue: await hasDependency(packageInfo, "vue"),
+    prettier: await hasDependency(packageInfo, "prettier"),
     jest:
-      (await hasDependency(packageInfo, 'jest')) ||
-      (await hasDependency(packageInfo, '@vue/cli-plugin-unit-jest')),
+      (await hasDependency(packageInfo, "jest")) ||
+      (await hasDependency(packageInfo, "@vue/cli-plugin-unit-jest")),
     node: !!currentConfig && !!currentConfig.env && !!currentConfig.env.node,
   };
   const detectedKeys = Object.keys(detected);
 
   const promptsConfig = setupConfig.skipDetectedPrompts
-    ? setupConfig.prompts.map(prompt => ({
+    ? setupConfig.prompts.map((prompt) => ({
         ...prompt,
         type: (prev, values, _prompt) => {
           if (detectedKeys.includes(prompt.name)) {
             return null;
           }
-          if (typeof prompt.type === 'function') {
+          if (typeof prompt.type === "function") {
             return prompt.type(prev, { ...detected, ...values }, _prompt);
           }
           return prompt.type;
@@ -79,13 +79,13 @@ async function loadCurrentConfig(setupConfig) {
   try {
     currentConfig = await readFile(configPath);
   } catch (error) {
-    currentConfig = '---';
+    currentConfig = "---";
   }
   try {
     currentConfig = yaml.safeLoad(currentConfig);
   } catch (error) {
     const rawConfig = await readFile(configPath);
-    headerJS = rawConfig.slice(0, rawConfig.indexOf('module.exports'));
+    headerJS = rawConfig.slice(0, rawConfig.indexOf("module.exports"));
     currentConfig = require(configPath);
   }
   return currentConfig;
@@ -96,7 +96,7 @@ async function updateEslintConfig(setupConfig, config, currentConfig) {
   const configPath = getConfigPath(setupConfig);
   const mergedConfigs = mergeConfigs(currentConfig, generatedConfig);
 
-  if (configPath.endsWith('.js')) {
+  if (configPath.endsWith(".js")) {
     await writeFile(
       configPath,
       `${headerJS}module.exports = ${JSON.stringify(mergedConfigs, null, 2)}`
@@ -107,12 +107,12 @@ async function updateEslintConfig(setupConfig, config, currentConfig) {
 }
 
 function getConfigPath(setupConfig) {
-  return require(path.resolve(process.cwd(), 'package.json')).name ===
+  return require(path.resolve(process.cwd(), "package.json")).name ===
     setupConfig.name
-    ? path.join(process.cwd(), '.eslintrc.test')
-    : fs.existsSync(path.join(process.cwd(), '.eslintrc'))
-    ? path.join(process.cwd(), '.eslintrc')
-    : path.join(process.cwd(), '.eslintrc.js');
+    ? path.join(process.cwd(), ".eslintrc.test")
+    : fs.existsSync(path.join(process.cwd(), ".eslintrc"))
+    ? path.join(process.cwd(), ".eslintrc")
+    : path.join(process.cwd(), ".eslintrc.js");
 }
 
 function mergeConfigs(current, generated) {
@@ -124,16 +124,16 @@ function mergeConfigs(current, generated) {
 }
 
 function dependencyString(packageInfo) {
-  return function(name) {
+  return function (name) {
     return `${name}@${packageInfo.devDependencies[name]}`;
   };
 }
 
 function install(config) {
   if (config.yarn) {
-    return execa('yarn', ['add', '--dev', ...config.dependencies]);
+    return execa("yarn", ["add", "--dev", ...config.dependencies]);
   }
-  return execa('npm', ['install', '--save-dev', ...config.dependencies]);
+  return execa("npm", ["install", "--save-dev", ...config.dependencies]);
 }
 
 async function exists(path) {
