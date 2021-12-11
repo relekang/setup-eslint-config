@@ -34,7 +34,11 @@ the prompt will be skipped. See list of autodetected things below.
 * jest - is jest a dependency or dev dependency
 * node - eslintConfig.env.node is true
 
-Create a file like the following example, and then add it to bin in `package.json`.
+Create a file like the following example, and then add it to bin in
+`package.json`. If you define it in bin as the same name as the
+package you can use npx to install or upgrade it in the projects with
+`npx eslint-config-relekang@latest`. See [eslint-config-relekang][] as
+example.
 
 ```javascript
 const {setup} = require('setup-eslint-config')
@@ -68,3 +72,4 @@ setup({
 ```
 
 [prompts]: https://www.npmjs.com/package/prompts
+[eslint-config-relekang]: https://github.com/relekang/eslint-config-relekang
