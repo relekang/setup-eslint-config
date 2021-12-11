@@ -10,9 +10,8 @@ const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 const access = promisify(fs.access);
 
-let headerJS;
 async function setup(setupConfig) {
-  const currentConfig = await loadCurrentConfig(setupConfig);
+  const { prefix, currentConfig } = await loadCurrentConfig(setupConfig);
   const config = await createConfig(setupConfig, currentConfig);
   const tasks = new Listr([
     {
@@ -28,7 +27,8 @@ async function setup(setupConfig) {
     },
     {
       title: "Creating configuration",
-      task: () => updateEslintConfig(setupConfig, config, currentConfig),
+      task: () =>
+        updateEslintConfig({ setupConfig, config, currentConfig, prefix }),
     },
     {
       title: `Installing dependencies ${config.dependencies}`,
@@ -100,6 +100,7 @@ async function oneOf(array) {
 }
 
 async function loadCurrentConfig(setupConfig) {
+  let prefix = "";
   let currentConfig;
   const configPath = getConfigPath(setupConfig);
   try {
@@ -111,13 +112,18 @@ async function loadCurrentConfig(setupConfig) {
     currentConfig = yaml.load(currentConfig);
   } catch (error) {
     const rawConfig = await readFile(configPath);
-    headerJS = rawConfig.slice(0, rawConfig.indexOf("module.exports"));
+    prefix = rawConfig.slice(0, rawConfig.indexOf("module.exports"));
     currentConfig = require(configPath);
   }
-  return currentConfig;
+  return { prefix, currentConfig };
 }
 
-async function updateEslintConfig(setupConfig, config, currentConfig) {
+async function updateEslintConfig({
+  setupConfig,
+  config,
+  currentConfig,
+  prefix,
+}) {
   const generatedConfig = setupConfig.createEslintConfig(config);
   const configPath = getConfigPath(setupConfig);
   const mergedConfigs = mergeConfigs(currentConfig, generatedConfig);
@@ -125,7 +131,11 @@ async function updateEslintConfig(setupConfig, config, currentConfig) {
   if (configPath.endsWith(".js")) {
     await writeFile(
       configPath,
-      `${headerJS}module.exports = ${JSON.stringify(mergedConfigs, null, 2)}`
+      `${(prefix?.toString() || "")?.trim()}\nmodule.exports = ${JSON.stringify(
+        mergedConfigs,
+        null,
+        2
+      )}`
     );
   } else {
     await writeFile(configPath, `---\n${yaml.dump(mergedConfigs)}`);
@@ -135,7 +145,7 @@ async function updateEslintConfig(setupConfig, config, currentConfig) {
 function getConfigPath(setupConfig) {
   return require(path.resolve(process.cwd(), "package.json")).name ===
     setupConfig.name
-    ? path.join(process.cwd(), ".eslintrc.test")
+    ? path.join(process.cwd(), ".eslintrc.test.js")
     : fs.existsSync(path.join(process.cwd(), ".eslintrc"))
     ? path.join(process.cwd(), ".eslintrc")
     : path.join(process.cwd(), ".eslintrc.js");
