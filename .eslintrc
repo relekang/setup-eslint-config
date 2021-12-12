@@ -2,12 +2,25 @@
 extends:
   - eslint:recommended
   - plugin:prettier/recommended
+plugins:
+  - prettier
+  - '@typescript-eslint'
 parserOptions:
+  project: ./tsconfig.json
   ecmaVersion: 2020
 env:
   node: true
   es6: true
+ignorePatterns: ["dist*"]
 overrides:
   - files: ["**/__tests__/**"]
     env:
       jest: true
+  - files: ["**/*.ts"]
+    parser: '@typescript-eslint/parser'
+    extends:
+    - 'plugin:@typescript-eslint/recommended'
+    - 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+    rules:
+      '@typescript-eslint/no-var-requires': off
+      '@typescript-eslint/restrict-template-expressions': off

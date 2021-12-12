@@ -2,7 +2,7 @@
   "name": "setup-eslint-config",
   "version": "1.4.0",
   "description": "Helper to create setup scripts for eslint configs",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "git@github.com:relekang/setup-eslint-config.git",
   "author": "Rolf Erik Lekang <me@rolflekang.com>",
   "license": "MIT",
@@ -10,11 +10,14 @@
     "test": "jest",
     "lint": "eslint .",
     "format": "yarn lint --fix",
+    "prepack": "tsc",
+    "tsc": "tsc",
     "release": "standard-version -i changelog.md"
   },
   "files": [
     "readme.md",
-    "index.js",
+    "dist/*.js",
+    "dist/*.ts",
     "license"
   ],
   "dependencies": {
@@ -24,11 +27,21 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
+    "@tsconfig/node12": "^1.0.9",
+    "@types/eslint": "^8.2.1",
+    "@types/jest": "^27.0.3",
+    "@types/js-yaml": "^4.0.5",
+    "@types/prompts": "^2.0.14",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "^27.4.4",
     "prettier": "^2.5.1",
-    "standard-version": "^9.3.2"
+    "standard-version": "^9.3.2",
+    "ts-jest": "^27.1.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.3"
   }
 }

@@ -1,5 +1,8 @@
 #!/usr/bin/env node
-const { setup } = require("./");
+
+// replace this with import of the package
+// const { setup } = require("setup-eslint-config");
+const { setup } = require("./src");
 
 const packageInfo = require("./package.json");
 

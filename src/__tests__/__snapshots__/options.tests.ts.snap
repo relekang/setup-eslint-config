@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createConfig with node set in current config 1`] = `
+exports[`buildOptions with node set in current config 1`] = `
 Object {
   "ava": false,
   "babel": false,
@@ -14,13 +14,13 @@ Object {
   "node": true,
   "prettier": true,
   "react": false,
-  "typescript": false,
+  "typescript": true,
   "vue": false,
   "yarn": false,
 }
 `;
 
-exports[`createConfig without env in current config 1`] = `
+exports[`buildOptions without env in current config 1`] = `
 Object {
   "ava": false,
   "babel": false,
@@ -34,7 +34,7 @@ Object {
   "node": false,
   "prettier": true,
   "react": false,
-  "typescript": false,
+  "typescript": true,
   "vue": false,
   "yarn": false,
 }
