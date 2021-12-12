@@ -46,20 +46,24 @@ export async function writeConfig({
       `${prefix.trim()}\nmodule.exports = ${JSON.stringify(config, null, 2)}`
     );
   } else {
-    await writeFile(configPath, `---\n${yaml.dump(config)}`);
+    await writeFile(
+      configPath,
+      `---\n${yaml.dump(config, { quotingType: '"' })}`
+    );
   }
 }
 
 function getConfigPath(setupConfig: SetupConfig) {
+  const cwd = process.cwd();
   const projectPackageInfo = require(path.resolve(
-    process.cwd(),
+    cwd,
     "package.json"
   )) as PackageInfo;
   return projectPackageInfo.name === setupConfig.name
-    ? path.join(process.cwd(), ".eslintrc.test.js")
-    : fs.existsSync(path.join(process.cwd(), ".eslintrc"))
-    ? path.join(process.cwd(), ".eslintrc")
-    : path.join(process.cwd(), ".eslintrc.js");
+    ? path.join(cwd, process.env.ESLINT_TEST_FILENAME || ".eslintrc.test")
+    : fs.existsSync(path.join(cwd, ".eslintrc"))
+    ? path.join(cwd, ".eslintrc")
+    : path.join(cwd, ".eslintrc.js");
 }
 
 export async function exists(path: string) {
