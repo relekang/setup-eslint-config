@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/relekang/setup-eslint-config/compare/v1.4.0...v1.5.0) (2021-12-12)
+
+
+### Features
+
+* Add detectors for mocha, cypress and ava ([35ae5ed](https://github.com/relekang/setup-eslint-config/commit/35ae5ed1af59df9a10b8ebd34e0f5e9cbc19da51))
+
+
+### Bug Fixes
+
+* remove issue with undefined in new js config ([cacd1c2](https://github.com/relekang/setup-eslint-config/commit/cacd1c218b08fca4be44398f0e61594bb8c38a83))
+* Set yaml to use double quotes for globs ([01db9d8](https://github.com/relekang/setup-eslint-config/commit/01db9d83bff7c6448864c2cc017d77b52a512371)), closes [#4](https://github.com/relekang/setup-eslint-config/issues/4)
+* use specific version in installing of the config ([c1db35b](https://github.com/relekang/setup-eslint-config/commit/c1db35b95dcd6fa91b183b4f393aec8a69f9e52e))
+
 ## [1.4.0](https://github.com/relekang/setup-eslint-config/compare/v1.3.5...v1.4.0) (2021-12-11)
 
 
