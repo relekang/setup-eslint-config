@@ -2,19 +2,21 @@ import { Linter } from "eslint";
 import prompts from "prompts";
 
 export interface ConfigOptions {
-  yarn: boolean;
+  features: string[];
+  dependencies: string[];
+
+  ava: boolean;
   babel: boolean;
-  typescript: boolean;
+  cypress: boolean;
   flowtype: boolean;
-  react: boolean;
-  vue: boolean;
-  prettier: boolean;
   jest: boolean;
   mocha: boolean;
-  ava: boolean;
-  cypress: boolean;
   node: boolean;
-  dependencies: string[];
+  prettier: boolean;
+  react: boolean;
+  typescript: boolean;
+  vue: boolean;
+  yarn: boolean;
 }
 
 export interface PackageInfo {
@@ -24,9 +26,11 @@ export interface PackageInfo {
   devDependencies?: Record<string, string>;
 }
 
+export type PromptObject = prompts.PromptObject & { name: string };
+
 export interface SetupConfig {
   name: string;
-  prompts: prompts.PromptObject[];
+  prompts: PromptObject[];
   skipDetectedPrompts?: boolean;
   packageInfo: PackageInfo;
   createEslintConfig: (

@@ -26,7 +26,7 @@ export async function loadCurrentConfig(setupConfig: SetupConfig) {
     prefix = rawConfig.slice(0, rawConfig.indexOf("module.exports")).toString();
     currentConfig = require(configPath) as Linter.Config;
   }
-  return { prefix, currentConfig };
+  return { prefix, currentConfig: currentConfig || {} };
 }
 
 export async function writeConfig({

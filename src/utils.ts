@@ -27,3 +27,11 @@ export async function oneOf(
 ): Promise<boolean> {
   return (await Promise.all(array)).some((v) => v);
 }
+
+export function pick<T>(fields: string[], obj: T) {
+  return fields.reduce<Record<string, unknown>>((acc, field) => {
+    // @ts-expect-error ---
+    acc[field] = obj[field];
+    return acc;
+  }, {});
+}

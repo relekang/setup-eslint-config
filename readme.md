@@ -20,7 +20,9 @@ Below is an example with the basic usage. The prompts property is passed on to
 the [prompts][] package, thus read their documentation on available options.
 The result of the prompts are passed to functions as `config`. If there is an
 autodetection with the same name and `skipDetectedPrompts` is set to true then
-the prompt will be skipped. See list of autodetected things below.
+the prompt will be skipped. See list of autodetected things below. The values of
+the fields defined in the prompts will be stored in the config part of the eslint
+config and then reused the next time. This will also happen if it is detected.
 
 #### Autodetection
 

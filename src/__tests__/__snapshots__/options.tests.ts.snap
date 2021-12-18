@@ -8,6 +8,7 @@ Object {
   "dependencies": Array [
     "eslint@^42",
   ],
+  "features": Array [],
   "flowtype": false,
   "jest": true,
   "mocha": false,
@@ -28,6 +29,7 @@ Object {
   "dependencies": Array [
     "eslint@^42",
   ],
+  "features": Array [],
   "flowtype": false,
   "jest": true,
   "mocha": false,

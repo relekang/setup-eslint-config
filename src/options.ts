@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import prompts from "prompts";
 import { promisify } from "util";
-import { ConfigOptions, PackageInfo, SetupConfig } from "./types";
+import { ConfigOptions, PackageInfo, PromptObject, SetupConfig } from "./types";
 import { exists } from "./files";
 import { dependencyString, hasDependency, oneOf } from "./utils";
 import { Linter } from "eslint";
@@ -17,7 +17,10 @@ export async function buildOptions(
   const packageInfo = JSON.parse(
     (await readFile(path.resolve(cwd, "package.json"))).toString()
   ) as unknown as PackageInfo;
-  const detected = {
+  const storedOptions = (
+    currentConfig.settings ? currentConfig.settings[setupConfig.name] : {}
+  ) as Record<string, boolean>;
+  const detected: Omit<ConfigOptions, "dependencies" | "features"> = {
     yarn: await exists(path.resolve(cwd, "yarn.lock")),
     babel: await oneOf(
       exists(path.resolve(cwd, ".babelrc")),
@@ -39,26 +42,31 @@ export async function buildOptions(
     ava: hasDependency(packageInfo, "ava"),
     cypress: hasDependency(packageInfo, "cypress"),
     node: !!currentConfig?.env?.node,
+    ...storedOptions,
   };
   const detectedKeys = Object.keys(detected);
 
   const promptsConfig = setupConfig.skipDetectedPrompts
     ? setupConfig.prompts.map(
-        (prompt: prompts.PromptObject): prompts.PromptObject => ({
+        (prompt: PromptObject): PromptObject => ({
           ...prompt,
-          type: detectedKeys.includes(prompt.name as string)
-            ? null
-            : prompt.type,
+          type: detectedKeys.includes(prompt.name) ? null : prompt.type,
         })
       )
     : setupConfig.prompts;
   const answers = await prompts(promptsConfig);
-  const config = {
+  const features = promptsConfig.map(({ name }) => name);
+  const config: ConfigOptions = {
     ...detected,
     ...answers,
 
+    features,
     dependencies: setupConfig
-      .createDependencyList({ ...detected, ...answers })
+      .createDependencyList({
+        ...detected,
+        ...answers,
+        features,
+      })
       .map(dependencyString(setupConfig.packageInfo)),
   };
 
