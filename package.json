@@ -21,6 +21,7 @@
     "license"
   ],
   "dependencies": {
+    "debug": "^4.3.3",
     "execa": "^5.1.1",
     "js-yaml": "^4.1.0",
     "listr2": "^3.13.5",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@tsconfig/node12": "^1.0.9",
+    "@types/debug": "^4.1.7",
     "@types/eslint": "^8.2.1",
     "@types/jest": "^27.0.3",
     "@types/js-yaml": "^4.0.5",

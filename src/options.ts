@@ -6,6 +6,9 @@ import { ConfigOptions, PackageInfo, PromptObject, SetupConfig } from "./types";
 import { exists } from "./files";
 import { dependencyString, hasDependency, oneOf } from "./utils";
 import { Linter } from "eslint";
+import _debug from "debug";
+
+const debug = _debug("setup-eslint-config:options");
 
 const readFile = promisify(fs.readFile);
 
@@ -20,6 +23,8 @@ export async function buildOptions(
   const storedOptions = (
     currentConfig.settings ? currentConfig.settings[setupConfig.name] : {}
   ) as Record<string, boolean>;
+
+  debug({ storedOptions });
   const detected: Omit<ConfigOptions, "dependencies" | "features"> = {
     yarn: await exists(path.resolve(cwd, "yarn.lock")),
     babel: await oneOf(
@@ -44,6 +49,9 @@ export async function buildOptions(
     node: !!currentConfig?.env?.node,
     ...storedOptions,
   };
+
+  debug({ detected });
+
   const detectedKeys = Object.keys(detected);
 
   const promptsConfig = setupConfig.skipDetectedPrompts
@@ -55,8 +63,10 @@ export async function buildOptions(
       )
     : setupConfig.prompts;
   const answers = await prompts(promptsConfig);
+  debug({ answers });
   const features = promptsConfig.map(({ name }) => name);
-  const config: ConfigOptions = {
+  debug({ features });
+  const options: ConfigOptions = {
     ...detected,
     ...answers,
 
@@ -69,6 +79,6 @@ export async function buildOptions(
       })
       .map(dependencyString(setupConfig.packageInfo)),
   };
-
-  return config;
+  debug({ options });
+  return options;
 }

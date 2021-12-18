@@ -4,6 +4,9 @@ import { promisify } from "util";
 import yaml from "js-yaml";
 import { PackageInfo, SetupConfig } from "./types";
 import { Linter } from "eslint";
+import _debug from "debug";
+
+const debug = _debug("setup-eslint-config:files");
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
@@ -13,6 +16,7 @@ export async function loadCurrentConfig(setupConfig: SetupConfig) {
   let prefix = "";
   let currentConfig: Linter.Config;
   const configPath = getConfigPath(setupConfig);
+  debug(`Reading config from ${configPath}`);
   let configString;
   try {
     configString = (await readFile(configPath)).toString();
@@ -39,6 +43,7 @@ export async function writeConfig({
   prefix: string;
 }) {
   const configPath = getConfigPath(setupConfig);
+  debug(`Writing config to ${configPath}`);
 
   if (configPath.endsWith(".js")) {
     await writeFile(
