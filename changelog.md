@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/relekang/setup-eslint-config/compare/v1.6.0...v1.7.0) (2021-12-18)
+
+
+### Features
+
+* Add debug logging ([6997095](https://github.com/relekang/setup-eslint-config/commit/699709552e51582f153da3af676e12d9d33ef47d))
+
 ## [1.6.0](https://github.com/relekang/setup-eslint-config/compare/v1.5.0...v1.6.0) (2021-12-18)
 
 

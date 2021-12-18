@@ -1,6 +1,6 @@
 {
   "name": "setup-eslint-config",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Helper to create setup scripts for eslint configs",
   "main": "dist/index.js",
   "repository": "git@github.com:relekang/setup-eslint-config.git",
