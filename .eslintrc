@@ -16,7 +16,7 @@ overrides:
   - files: ["**/__tests__/**"]
     env:
       jest: true
-  - files: ["**/*.ts"]
+  - files: ["src/**/*.ts"]
     parser: '@typescript-eslint/parser'
     extends:
     - 'plugin:@typescript-eslint/recommended'

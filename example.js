@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// not needed when importing from npm package
+require("ts-node/register");
 
 // replace this with import of the package
 // const { setup } = require("setup-eslint-config");

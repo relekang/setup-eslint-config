@@ -1,12 +1,13 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
 // replace this with import of the package
 // const { setup } = require("setup-eslint-config");
-import { setup } from "./src";
+require("ts-node/register");
+const { setup } = require("./src");
 
-import packageInfo from "./package.json";
+const packageInfo = require("./package.json");
 
-async function test(filename: string) {
+async function test(filename) {
   console.log("\n", filename);
   process.env.ESLINT_TEST_FILENAME = filename;
   await setup({

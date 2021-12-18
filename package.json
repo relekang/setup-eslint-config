@@ -10,7 +10,7 @@
     "test": "jest",
     "lint": "eslint .",
     "format": "yarn lint --fix",
-    "prepack": "tsc",
+    "prepack": "rm -rf dist && tsc && test -f dist/index.js",
     "tsc": "tsc",
     "release": "standard-version -i changelog.md"
   },

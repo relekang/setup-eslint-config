@@ -1,6 +1,6 @@
 {
   "extends": "@tsconfig/node12/tsconfig.json",
-  "include": ["./src/", "./t.ts"],
+  "include": ["./src/"],
   "compilerOptions": {
     "module": "commonjs",
     "resolveJsonModule": true,
