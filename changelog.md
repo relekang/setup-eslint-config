@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/relekang/setup-eslint-config/compare/v1.5.0...v1.6.0) (2021-12-18)
+
+
+### Features
+
+* Add storing of previous choices in eslintconfig.settings ([dda35b0](https://github.com/relekang/setup-eslint-config/commit/dda35b0c11f635f6de464e90d775cf5076fa675f)), closes [#21](https://github.com/relekang/setup-eslint-config/issues/21)
+
 ## [1.5.0](https://github.com/relekang/setup-eslint-config/compare/v1.4.0...v1.5.0) (2021-12-12)
 
 
