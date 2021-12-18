@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://github.com/relekang/setup-eslint-config/compare/v1.7.0...v1.7.1) (2021-12-18)
+
+
+### Bug Fixes
+
+* remove non src items from tsc include ([3504217](https://github.com/relekang/setup-eslint-config/commit/3504217c348e5ae9e19a6138893b83c68a62ed59))
+
 ## [1.7.0](https://github.com/relekang/setup-eslint-config/compare/v1.6.0...v1.7.0) (2021-12-18)
 
 
