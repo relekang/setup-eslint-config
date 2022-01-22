@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.8.1](https://github.com/relekang/setup-eslint-config/compare/v1.8.0...v1.8.1) (2022-01-22)
+
+
+### Bug Fixes
+
+* Add npm commands without parallelisation ([84c40ad](https://github.com/relekang/setup-eslint-config/commit/84c40ad704368eee59b474260b33876d686b0325))
+
 ## [1.8.0](https://github.com/relekang/setup-eslint-config/compare/v1.7.1...v1.8.0) (2022-01-22)
 
 
