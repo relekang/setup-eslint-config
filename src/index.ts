@@ -4,7 +4,12 @@ import path from "path";
 
 import { SetupConfig } from "./types";
 import { loadCurrentConfig } from "./files";
-import { install, updateCommands, updateEslintConfig } from "./config";
+import {
+  createInstallConfigTask,
+  install,
+  updateCommands,
+  updateEslintConfig,
+} from "./config";
 import { buildOptions } from "./options";
 
 import { DebugRenderer } from "./listr";
@@ -21,16 +26,7 @@ export async function setup(setupConfig: SetupConfig) {
   });
   const tasks = new Listr(
     [
-      {
-        title: `Installing ${setupConfig.packageInfo.name}@${setupConfig.packageInfo.version}`,
-        task: install({
-          ...options,
-          dependencies: [
-            `${setupConfig.packageInfo.name}@${setupConfig.packageInfo.version}`,
-          ],
-        }),
-        skip: process.env.npm_lifecycle_event !== "npx",
-      },
+      createInstallConfigTask({ setupConfig, options }),
       {
         title: "Creating configuration",
         task: updateEslintConfig({

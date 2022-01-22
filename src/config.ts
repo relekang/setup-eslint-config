@@ -52,6 +52,32 @@ export function install(config: { yarn: boolean; dependencies: string[] }) {
   };
 }
 
+export function createInstallConfigTask({
+  setupConfig,
+  options,
+  argv,
+  env,
+}: {
+  setupConfig: SetupConfig;
+  options: ConfigOptions;
+  argv: string[];
+  env: { npm_lifecycle_event?: string };
+}) {
+  const npx = env.npm_lifecycle_event === "npx";
+  let version = setupConfig.packageInfo.version;
+  if (npx && argv[1].includes("@")) {
+    version = argv[1].split("@")[1];
+  }
+  return {
+    title: `Installing ${setupConfig.packageInfo.name}@${version}`,
+    task: install({
+      ...options,
+      dependencies: [`${setupConfig.packageInfo.name}@${version}`],
+    }),
+    skip: !npx,
+  };
+}
+
 export function updateCommands({
   setupConfig,
   options,
