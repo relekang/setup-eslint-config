@@ -52,7 +52,21 @@ export async function buildOptions(
 
   debug({ detected });
 
-  const detectedKeys = Object.keys(detected);
+  const fileChecks = (
+    await Promise.all(
+      (setupConfig.fileChecks || []).map(async (check) => ({
+        name: check.name,
+        exists: await exists(path.resolve(cwd, check.path)),
+      }))
+    )
+  ).reduce<Record<string, boolean>>((checks, { name, exists }) => {
+    checks[name] = exists;
+    return checks;
+  }, {});
+
+  debug({ fileChecks });
+
+  const detectedKeys = [...Object.keys(detected), ...Object.keys(fileChecks)];
 
   const promptsConfig = setupConfig.skipDetectedPrompts
     ? setupConfig.prompts.map(

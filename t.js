@@ -16,6 +16,10 @@ async function test(filename) {
       { type: "confirm", name: "prettier", message: "Use prettier?" },
       { type: "confirm", name: "day", message: "Having a nice day?" },
     ],
+    fileChecks: [
+      { name: "license", path: "license" },
+      { name: "test", path: "test" },
+    ],
     skipDetectedPrompts: true,
     packageInfo,
     createEslintConfig: (config) => {

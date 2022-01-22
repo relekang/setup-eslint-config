@@ -53,6 +53,7 @@ setup({
   prompts: [
     { type: 'confirm', name: 'prettier', message: 'Use prettier?' },
   ],
+  fileChecks: [{name: "docker": path: "Dockerfile" }],
   skipDetectedPrompts: true,
   createEslintConfig: (config) => {
       const extending = ["relekang"]

@@ -28,9 +28,15 @@ export interface PackageInfo {
 
 export type PromptObject = prompts.PromptObject & { name: string };
 
+export interface FileCheck {
+  name: string;
+  path: string;
+}
+
 export interface SetupConfig {
   name: string;
   prompts: PromptObject[];
+  fileChecks?: FileCheck[];
   skipDetectedPrompts?: boolean;
   packageInfo: PackageInfo;
   createEslintConfig: (
