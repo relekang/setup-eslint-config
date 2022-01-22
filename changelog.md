@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/relekang/setup-eslint-config/compare/v1.9.0...v1.10.0) (2022-01-22)
+
+
+### Features
+
+* Add support for specifying version as arg ([ab57571](https://github.com/relekang/setup-eslint-config/commit/ab575714bd758159fefd2c31eea9a4e3a967b2fa))
+
 ## [1.9.0](https://github.com/relekang/setup-eslint-config/compare/v1.8.2...v1.9.0) (2022-01-22)
 
 
