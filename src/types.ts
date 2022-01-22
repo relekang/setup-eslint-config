@@ -45,4 +45,7 @@ export interface SetupConfig {
   createDependencyList: (
     config: Omit<ConfigOptions, "dependencies">
   ) => string[];
+  createNpmCommands?: (
+    config: Omit<ConfigOptions, "dependencies">
+  ) => Record<string, string | undefined>;
 }

@@ -1,7 +1,7 @@
 import { Listr } from "listr2";
 import { SetupConfig } from "./types";
 import { loadCurrentConfig } from "./files";
-import { install, updateEslintConfig } from "./config";
+import { install, updateCommands, updateEslintConfig } from "./config";
 import { buildOptions } from "./options";
 import _debug from "debug";
 import { DebugRenderer } from "./listr";
@@ -16,23 +16,31 @@ export async function setup(setupConfig: SetupConfig) {
     [
       {
         title: `Installing ${setupConfig.packageInfo.name}@${setupConfig.packageInfo.version}`,
-        task: () =>
-          install({
-            ...options,
-            dependencies: [
-              `${setupConfig.packageInfo.name}@${setupConfig.packageInfo.version}`,
-            ],
-          }),
+        task: install({
+          ...options,
+          dependencies: [
+            `${setupConfig.packageInfo.name}@${setupConfig.packageInfo.version}`,
+          ],
+        }),
         skip: process.env.npm_lifecycle_event !== "npx",
       },
       {
         title: "Creating configuration",
-        task: () =>
-          updateEslintConfig({ setupConfig, options, currentConfig, prefix }),
+        task: updateEslintConfig({
+          setupConfig,
+          options,
+          currentConfig,
+          prefix,
+        }),
+      },
+      {
+        title: "Update npm commands",
+        task: updateCommands({ setupConfig, options }),
+        skip: !setupConfig.createNpmCommands,
       },
       {
         title: `Installing dependencies ${options.dependencies.toString()}`,
-        task: () => install(options),
+        task: install(options),
       },
     ],
     { renderer: process.env.DEBUG ? DebugRenderer : "default" }

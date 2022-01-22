@@ -38,6 +38,13 @@ async function test(filename) {
       }
       return dependencies;
     },
+    createNpmCommands: () => {
+      return {
+        lint: "eslint --cache .",
+        "lint:errors": "eslint --cache --quiet .",
+        format: "eslint --cache --quiet --fix .",
+      };
+    },
   });
   console.log("\n");
 }

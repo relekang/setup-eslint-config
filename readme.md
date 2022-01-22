@@ -71,6 +71,13 @@ setup({
     }
     return dependencies;
   }
+  createNpmCommands: ({typescript}) => {
+    return {
+      lint: `eslint --cache ${typescript? '--ext ts,tsx,js,jsx': ''} .`,
+      "lint:errors": `eslint --cache --quiet ${typescript? '--ext ts,tsx,js,jsx': ''} .`,
+      format: `eslint --cache --quiet --fix ${typescript? '--ext ts,tsx,js,jsx': ''} .`,
+    };
+  },
 }).catch(error => {
     console.error(error.message)
     process.exit(1)
