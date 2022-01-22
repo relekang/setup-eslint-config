@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/relekang/setup-eslint-config/compare/v1.8.2...v1.9.0) (2022-01-22)
+
+
+### Features
+
+* Add parsing of version passed to npx ([0a07e51](https://github.com/relekang/setup-eslint-config/commit/0a07e5149abd93e9286c29b39577baccc9312ab8))
+
 ### [1.8.2](https://github.com/relekang/setup-eslint-config/compare/v1.8.1...v1.8.2) (2022-01-22)
 
 
