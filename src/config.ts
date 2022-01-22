@@ -67,7 +67,10 @@ export function createInstallConfigTask({
   let version = setupConfig.packageInfo.version;
   if (npx && argv[1].includes("@")) {
     version = argv[1].split("@")[1];
+  } else if (argv.length === 3) {
+    version = argv[2];
   }
+
   return {
     title: `Installing ${setupConfig.packageInfo.name}@${version}`,
     task: install({

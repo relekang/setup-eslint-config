@@ -24,6 +24,16 @@ the prompt will be skipped. See list of autodetected things below. The values of
 the fields defined in the prompts will be stored in the config part of the eslint
 config and then reused the next time. This will also happen if it is detected.
 
+## Specifying version when using npx
+
+Since npx sometimes chooses the installed version even when version is
+specified this library supports first argument to be the wanted version:
+
+```
+npx eslint-config-relekang latest
+npx eslint-config-relekang 2.0.0
+```
+
 #### Autodetection
 
 * yarn - is there a yarn.lock file in the directory
