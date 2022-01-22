@@ -8,12 +8,12 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "lint": "eslint --cache .",
-    "lint:errors": "eslint --cache --quiet .",
-    "format": "eslint --cache --quiet --fix .",
     "prepack": "rm -rf dist && tsc && test -f dist/index.js",
     "tsc": "tsc",
-    "release": "standard-version -i changelog.md"
+    "release": "standard-version -i changelog.md",
+    "lint": "eslint --cache .",
+    "lint:errors": "eslint --cache --quiet .",
+    "format": "eslint --cache --quiet --fix ."
   },
   "files": [
     "readme.md",

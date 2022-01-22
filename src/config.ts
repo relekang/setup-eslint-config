@@ -63,13 +63,11 @@ export function updateCommands({
     const commands = setupConfig.createNpmCommands
       ? setupConfig.createNpmCommands(options)
       : {};
-    await Promise.all(
-      Object.keys(commands).map((key) => {
-        const command = commands[key];
-        if (key && command) {
-          return execa("npm", ["set-script", key, command]);
-        }
-      })
-    );
+    for (const key in commands) {
+      const command = commands[key];
+      if (key && command) {
+        await execa("npm", ["set-script", key, command]);
+      }
+    }
   };
 }
