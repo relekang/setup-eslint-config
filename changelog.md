@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/relekang/setup-eslint-config/compare/v1.7.1...v1.8.0) (2022-01-22)
+
+
+### Features
+
+* Add support for creating npm commands ([cc5e596](https://github.com/relekang/setup-eslint-config/commit/cc5e596974112aaa9d723e77e3d10fae775c102e))
+* Add support for custom file checks ([b0024a4](https://github.com/relekang/setup-eslint-config/commit/b0024a40952949cbfc848f2e458e39170912be0b)), closes [#2](https://github.com/relekang/setup-eslint-config/issues/2)
+
 ### [1.7.1](https://github.com/relekang/setup-eslint-config/compare/v1.7.0...v1.7.1) (2021-12-18)
 
 
