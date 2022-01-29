@@ -30,15 +30,17 @@ async function test(filename) {
       }
       return { extends: extending };
     },
-    createDependencyList: (config) => {
-      const dependencies = ["eslint"];
-      if (config.prettier) {
-        dependencies.push("eslint-config-prettier");
-        dependencies.push("eslint-plugin-prettier");
-        dependencies.push("prettier");
-      }
-      return dependencies;
-    },
+    createDependencyList: filename.includes(".js")
+      ? (config) => {
+          const dependencies = ["eslint"];
+          if (config.prettier) {
+            dependencies.push("eslint-config-prettier");
+            dependencies.push("eslint-plugin-prettier");
+            dependencies.push("prettier");
+          }
+          return dependencies;
+        }
+      : undefined,
     createNpmCommands: () => {
       return {
         lint: "eslint --cache .",

@@ -84,12 +84,13 @@ export async function buildOptions(
     ...detected,
     ...answers,
     features,
-    dependencies: (
-      setupConfig.createDependencyList({
-        ...detected,
-        ...answers,
-        features,
-      }) || ["eslint"]
+    dependencies: (setupConfig.createDependencyList
+      ? setupConfig.createDependencyList({
+          ...detected,
+          ...answers,
+          features,
+        })
+      : ["eslint"]
     )
       .concat([
         ...(setupConfig.useEslintRelativePathPatch
