@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.11.0](https://github.com/relekang/setup-eslint-config/compare/v1.10.0...v1.11.0) (2022-01-29)
+
+
+### Features
+
+* Add support for patching the eslint resolver for relative paths ([8dc3a2b](https://github.com/relekang/setup-eslint-config/commit/8dc3a2b466cf8679797a99545f7c81646221d3f0))
+
 ## [1.10.0](https://github.com/relekang/setup-eslint-config/compare/v1.9.0...v1.10.0) (2022-01-22)
 
 
