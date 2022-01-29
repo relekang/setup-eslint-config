@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/relekang/setup-eslint-config/compare/v1.11.0...v1.11.1) (2022-01-29)
+
+
+### Bug Fixes
+
+* Handle missing createDependencyList ([42f5624](https://github.com/relekang/setup-eslint-config/commit/42f562431d3b1672107d5ba734f090755c3e923b))
+
 ## [1.11.0](https://github.com/relekang/setup-eslint-config/compare/v1.10.0...v1.11.0) (2022-01-29)
 
 
