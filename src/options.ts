@@ -83,14 +83,19 @@ export async function buildOptions(
   const options: ConfigOptions = {
     ...detected,
     ...answers,
-
     features,
-    dependencies: setupConfig
-      .createDependencyList({
+    dependencies: (
+      setupConfig.createDependencyList({
         ...detected,
         ...answers,
         features,
-      })
+      }) || ["eslint"]
+    )
+      .concat([
+        ...(setupConfig.useEslintRelativePathPatch
+          ? ["@rushstack/eslint-patch"]
+          : []),
+      ])
       .map(dependencyString(setupConfig.packageInfo)),
   };
   debug({ options });

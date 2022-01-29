@@ -33,11 +33,12 @@ export interface FileCheck {
   path: string;
 }
 
-export interface SetupConfig {
+interface BaseSetupConfig {
   name: string;
   prompts: PromptObject[];
   fileChecks?: FileCheck[];
   skipDetectedPrompts?: boolean;
+  useEslintRelativePathPatch?: boolean;
   packageInfo: PackageInfo;
   createEslintConfig: (
     config: Omit<ConfigOptions, "dependencies">
@@ -49,3 +50,17 @@ export interface SetupConfig {
     config: Omit<ConfigOptions, "dependencies">
   ) => Record<string, string | undefined>;
 }
+
+export type SetupConfig =
+  | (BaseSetupConfig & {
+      useEslintRelativePathPatch: true;
+      createDependencyList?: (
+        config: Omit<ConfigOptions, "dependencies">
+      ) => string[];
+    })
+  | (BaseSetupConfig & {
+      useEslintRelativePathPatch?: false;
+      createDependencyList: (
+        config: Omit<ConfigOptions, "dependencies">
+      ) => string[];
+    });

@@ -12,6 +12,9 @@ const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 const access = promisify(fs.access);
 
+const requireEslintRelativePatchStatement =
+  'require("@rushstack/eslint-patch/modern-module-resolution")';
+
 export async function loadCurrentConfig(setupConfig: SetupConfig) {
   let prefix = "";
   let currentConfig: Linter.Config;
@@ -28,7 +31,9 @@ export async function loadCurrentConfig(setupConfig: SetupConfig) {
   } catch (error) {
     const rawConfig = await readFile(configPath);
     prefix = rawConfig.slice(0, rawConfig.indexOf("module.exports")).toString();
-    currentConfig = require(configPath) as Linter.Config;
+    currentConfig = eval(
+      rawConfig.toString().replace(requireEslintRelativePatchStatement, "")
+    ) as Linter.Config;
   }
   return { prefix, currentConfig: currentConfig || {} };
 }
@@ -46,9 +51,22 @@ export async function writeConfig({
   debug(`Writing config to ${configPath}`);
 
   if (configPath.endsWith(".js")) {
+    const prefixHasPatchImport = !prefix.includes(
+      requireEslintRelativePatchStatement
+    );
     await writeFile(
       configPath,
-      `${prefix.trim()}\nmodule.exports = ${JSON.stringify(config, null, 2)}`
+      [
+        prefix.trim(),
+        setupConfig.useEslintRelativePathPatch && prefixHasPatchImport
+          ? requireEslintRelativePatchStatement
+          : "",
+        `module.exports = ${JSON.stringify(config, null, 2)}`,
+      ].join("\n")
+    );
+  } else if (setupConfig.useEslintRelativePathPatch) {
+    throw new Error(
+      "Can only use useEslintRelativePathPatch with js based eslint configs"
     );
   } else {
     await writeFile(

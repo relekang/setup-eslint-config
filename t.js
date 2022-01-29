@@ -22,6 +22,7 @@ async function test(filename) {
     ],
     skipDetectedPrompts: true,
     packageInfo,
+    useEslintRelativePathPatch: filename.includes(".js"),
     createEslintConfig: (config) => {
       const extending = ["relekang"];
       if (config.prettier) {
