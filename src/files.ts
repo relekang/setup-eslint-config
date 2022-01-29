@@ -14,6 +14,8 @@ const access = promisify(fs.access);
 
 const requireEslintRelativePatchStatement =
   'require("@rushstack/eslint-patch/modern-module-resolution")';
+const eslintRelativePatchCheck =
+  /require\(["'`]@rushstack\/eslint-patch\/modern-module-resolution["'`]\)/;
 
 export async function loadCurrentConfig(setupConfig: SetupConfig) {
   let prefix = "";
@@ -32,7 +34,7 @@ export async function loadCurrentConfig(setupConfig: SetupConfig) {
     const rawConfig = await readFile(configPath);
     prefix = rawConfig.slice(0, rawConfig.indexOf("module.exports")).toString();
     currentConfig = eval(
-      rawConfig.toString().replace(requireEslintRelativePatchStatement, "")
+      rawConfig.toString().replace(eslintRelativePatchCheck, "")
     ) as Linter.Config;
   }
   return { prefix, currentConfig: currentConfig || {} };
@@ -51,9 +53,7 @@ export async function writeConfig({
   debug(`Writing config to ${configPath}`);
 
   if (configPath.endsWith(".js")) {
-    const prefixHasPatchImport = !prefix.includes(
-      requireEslintRelativePatchStatement
-    );
+    const prefixHasPatchImport = !eslintRelativePatchCheck.test(prefix);
     await writeFile(
       configPath,
       [
@@ -61,6 +61,7 @@ export async function writeConfig({
         setupConfig.useEslintRelativePathPatch && prefixHasPatchImport
           ? requireEslintRelativePatchStatement
           : "",
+        "",
         `module.exports = ${JSON.stringify(config, null, 2)}`,
       ].join("\n")
     );
