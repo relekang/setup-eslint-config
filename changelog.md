@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.2](https://github.com/relekang/setup-eslint-config/compare/v1.11.1...v1.11.2) (2022-01-29)
+
+
+### Bug Fixes
+
+* Support multiple quote types in patch require ([8a086dd](https://github.com/relekang/setup-eslint-config/commit/8a086ddf550e37b857ac3f3093c53e742239a942))
+
 ### [1.11.1](https://github.com/relekang/setup-eslint-config/compare/v1.11.0...v1.11.1) (2022-01-29)
 
 
